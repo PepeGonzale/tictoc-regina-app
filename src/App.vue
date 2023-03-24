@@ -1,12 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <NavBar />
+
+    <main style="flex: 1">
+      <b-container class="my-5">
+        <router-view />
+      </b-container>
+    </main>
+
+    <footer style="flex-shrink: 0">
+      <Footer />
+    </footer>
   </div>
 </template>
+
+<script>
+import NavBar from "./components/NavBar.vue";
+import Footer from "./components/Footer.vue";
+import { BContainer } from "bootstrap-vue";
+
+export default {
+  name: "App",
+  components: {
+    NavBar,
+    Footer,
+    BContainer,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -15,6 +36,13 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
 }
 
 #nav {
