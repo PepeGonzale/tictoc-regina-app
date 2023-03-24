@@ -2,20 +2,11 @@
   <footer class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <h4>Nosotros Somos</h4>
           <p>Club Regina es un hotel de lujo en Puerto Vallarta, México. Nos enfocamos en brindar una experiencia excepcional a nuestros huéspedes y colaboradores.</p>
         </div>
-        <div class="col-sm-4">
-          <h4>Contáctanos</h4>
-          <address>
-            Av. Paseo de la Marina Sur 205, Marina Vallarta<br>
-            Puerto Vallarta, Jalisco<br>
-            México<br>
-            <abbr title="Phone">P:</abbr> +52 (322) 226-2300
-          </address>
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <h4>Redes Sociales</h4>
           <ul class="list-unstyled">
             <li><a href="https://www.facebook.com/RaintreeVacationClub/">Facebook</a></li>

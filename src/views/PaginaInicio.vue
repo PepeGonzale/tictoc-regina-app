@@ -12,7 +12,7 @@
         de manera fácil y eficiente.</b-card-text
       >
     </b-card>
-    <div class="home">
+    <div class="home mt-3">
       <div class="container">
         <h1></h1>
         <p></p>
@@ -92,6 +92,8 @@
         </div>
       </div>
     </div>
+
+      <iframe class="mt-3" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14933.2155949112!2d-105.2489107!3d20.6572117!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842145b84bc90a43%3A0xd460ef9aa6d9f1c!2sClub%20Regina%20Puerto%20Vallarta!5e0!3m2!1ses-419!2smx!4v1679700352915!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </template>
 
