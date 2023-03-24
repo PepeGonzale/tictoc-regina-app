@@ -2,7 +2,7 @@
   <div id="app">
     <NavBar />
 
-    <main style="flex: 1">
+    <main style="flex: 1;margin-top: 100px;">
       <b-container class="my-5">
         <router-view />
       </b-container>

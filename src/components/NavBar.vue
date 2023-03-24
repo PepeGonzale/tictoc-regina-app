@@ -1,7 +1,17 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" class="navbar-custom">
-      <b-navbar-brand href="/">Tick Tock Regina</b-navbar-brand>
+    <b-navbar toggleable="lg" type="dark" class="navbar-custom fixed-top">
+      <b-navbar-brand
+        href="/"
+        class="d-flex align-items-center justify-content-center"
+      >
+        <img
+          src="@/assets/logo-raintree.png"
+          class="d-inline-block align-top"
+          alt="Tick Tock Regina"
+        />
+        <span>Tick Tock Regina</span>
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -15,7 +25,9 @@
         <b-navbar-nav class="ml-auto">
           <b-navbar-nav>
             <b-nav-item :to="{ name: 'PaginaAcceder' }">Acceder</b-nav-item>
-            <b-nav-item :to="{ name: 'PaginaRegistrarme' }">Registrarme</b-nav-item>
+            <b-nav-item :to="{ name: 'PaginaRegistrarme' }"
+              >Registrarme</b-nav-item
+            >
           </b-navbar-nav>
 
           <!-- <b-nav-form>
@@ -61,5 +73,14 @@ export default {
 
 .navbar-custom {
   background-color: var(--primary-dark-color) !important;
+}
+.d-flex {
+  display: flex;
+}
+.align-items-center {
+  align-items: center;
+}
+.justify-content-center {
+  justify-content: center;
 }
 </style>

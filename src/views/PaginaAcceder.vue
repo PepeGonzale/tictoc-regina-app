@@ -17,25 +17,35 @@
                   <b-form-group id="input-group-1" label-for="input-1">
                     <b-form-input
                       id="input-1"
-                      v-model="form.email"
-                      type="email"
-                      placeholder="Ingrese su correo eléctronico..."
+                      v-model="formAcceder.noempleado"
+                      type="type"
+                      placeholder="Ingrese su número de empleado..."
                       required
                     ></b-form-input>
                   </b-form-group>
 
-                  <b-form-group id="input-group-2" label-for="input-2">
+                  <b-form-group @submit.stop.prevent>
                     <b-form-input
-                      id="input-2"
-                      v-model="form.name"
-                      placeholder="Ingrese su contraseña..."
+                      id="input-password-empleado"
+                      v-model="formAcceder.password"
+                      type="password"
+                      placeholder="Ingrese contraseña de empleado..."
+                      aria-describedby="password-help-block"
                       required
                     ></b-form-input>
+                    <b-form-text id="password-help-block">
+                      <p>
+                        He olvidado mi contraseña. <br />
+                        <b-button variant="link" :to="{ name: 'PaginaInicio' }"
+                          >Recuperar contraseña.</b-button
+                        >
+                      </p>
+                    </b-form-text>
                   </b-form-group>
 
-                  <div class="mt-3">
+                  <div>
                     <b-button-group>
-                      <b-button type="submit" variant="primary"
+                      <b-button type="submit" variant="success"
                         >Acceder</b-button
                       >
                       <b-button type="reset" variant="danger"
@@ -43,13 +53,6 @@
                       >
                     </b-button-group>
                   </div>
-
-                  <p class="mt-3">
-                    He olvidado mi contraseña. <br />
-                    <b-button variant="link" :to="{ name: 'PaginaInicio' }"
-                      >Quiero recuperar mi contraseña.</b-button
-                    >
-                  </p>
                 </b-form>
               </div>
             </b-card-body>
@@ -65,19 +68,10 @@ export default {
   name: "PaginaAcceder",
   data() {
     return {
-      form: {
-        email: "",
-        name: "",
-        food: null,
-        checked: [],
+      formAcceder: {
+        noempleado: "",
+        password: ""
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn",
-      ],
       show: true,
     };
   },
