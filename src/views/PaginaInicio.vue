@@ -1,15 +1,21 @@
 <template>
   <div>
+    <b-card
+      overlay
+      img-src="https://picsum.photos/900/250/?image=3"
+      img-alt="Card Image"
+      text-variant="white"
+      title="Tick Tock Regina"
+    >
+      <b-card-text
+        >Esta herramienta te permitirá revisar tu entrada y salida del trabajo
+        de manera fácil y eficiente.</b-card-text
+      >
+    </b-card>
     <div class="home">
       <div class="container">
-        <h1>
-          Bienvenidos al sistema de control de asistencia de Club Regina, Puerto
-          Vallarta
-        </h1>
-        <p>
-          Esta herramienta te permitirá revisar tu entrada y salida del trabajo
-          de manera fácil y eficiente.
-        </p>
+        <h1></h1>
+        <p></p>
         <h2>¿Cómo funciona?</h2>
         <p>
           Al ingresar a la herramienta, podrás ver un registro detallado de tus
@@ -45,43 +51,44 @@
       </div>
 
       <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">Registro de entrada y salida</h5>
-                <p class="card-text">
-                  Accede al sistema para registrar tu entrada y salida del
-                  trabajo.
-                </p>
-                <b-button class="custom-boton">Acceder</b-button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">Horario de trabajo</h5>
-                <p class="card-text">
-                  Revisa tu horario de trabajo para saber en qué días y horarios
-                  debes estar presente.
-                </p>
-                <b-button class="custom-boton">Acceder</b-button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-12 col-sm-12">
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">Contacto con recursos humanos</h5>
-                <p class="card-text">
-                  Si necesitas ayuda o tienes alguna duda, contacta con el
-                  departamento de recursos humanos.
-                </p>
-                <b-button class="custom-boton">Acceder</b-button>
-              </div>
-            </div>
-          </div>
+        <div>
+          <b-card-group deck>
+            <b-card
+              bg-variant="light"
+              header="Registro de entrada y salida"
+              class="text-center"
+            >
+              <b-card-text
+                >Accede al sistema para registrar tu entrada y salida del
+                trabajo.</b-card-text
+              >
+              <b-button class="custom-boton">Acceder</b-button>
+            </b-card>
+
+            <b-card
+              bg-variant="light"
+              header="Contacto con recursos humanos"
+              class="text-center"
+            >
+              <b-card-text>
+                Revisa tu horario de trabajo para saber en qué días y horarios
+                debes estar presente.</b-card-text
+              >
+              <b-button class="custom-boton">Acceder</b-button>
+            </b-card>
+
+            <b-card
+              bg-variant="light"
+              header="Registro de entrada y salida"
+              class="text-center"
+            >
+              <b-card-text
+                >Si necesitas ayuda o tienes alguna duda, contacta con el
+                departamento de recursos humanos.</b-card-text
+              >
+              <b-button class="custom-boton">Acceder</b-button>
+            </b-card>
+          </b-card-group>
         </div>
       </div>
     </div>
@@ -91,9 +98,7 @@
 <script>
 export default {
   name: "Home",
-  components: {
-    BButton: require("bootstrap-vue").BButton,
-  },
+  components: {},
 };
 </script>
 
