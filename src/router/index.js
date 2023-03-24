@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import PaginaNoEncontrado from '../views/PaginaNoEncontrado.vue'
 import PaginaBienvenido from '../views/PaginaBienvenido.vue'
 import PaginaEmpleado from '../views/PaginaEmpleado.vue'
-import PaginaEntrada from '../views/PaginaEntrada.vue'
+import PaginaAcceder from '../views/PaginaAcceder.vue'
+import PaginaRegistrarme from '../views/PaginaRegistrarme.vue'
 import PaginaInicio from '../views/PaginaInicio.vue'
 
 Vue.use(VueRouter)
@@ -11,7 +12,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/bienvenido'
+    redirect: '/inicio'
   },
   {
     path: '/inicio',
@@ -19,9 +20,14 @@ const routes = [
     component: PaginaInicio
   },
   {
-    path: '/entrada',
-    name: 'PaginaEntrada',
-    component: PaginaEntrada
+    path: '/acceder',
+    name: 'PaginaAcceder',
+    component: PaginaAcceder
+  },
+  {
+    path: '/registrarme',
+    name: 'PaginaRegistrarme',
+    component: PaginaRegistrarme
   },
   {
     path: '/empleado/:id',
