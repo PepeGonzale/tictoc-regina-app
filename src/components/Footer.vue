@@ -21,6 +21,7 @@
             <li><a href="https://www.facebook.com/RaintreeVacationClub/">Facebook</a></li>
             <li><a href="https://www.youtube.com/user/raintreevacationclub">Youtube</a></li>
             <li><a href="https://www.instagram.com/raintreevacationclub/">Instagram</a></li>
+            <li><a href="https://www.raintreevacationclub.com/es/vacation-resorts/mexico/puerto-vallarta/club-regina-puerto-vallarta/">Sitio Web</a></li>
           </ul>
         </div>
       </div>
