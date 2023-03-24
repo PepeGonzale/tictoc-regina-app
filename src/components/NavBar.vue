@@ -16,46 +16,37 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
+        <b-navbar-nav left v-if="session">
           <b-nav-item :to="{ name: 'PaginaInicio' }">Mis datos</b-nav-item>
           <b-nav-item :to="{ name: 'PaginaEntrada' }">Calendario</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-navbar-nav>
+        <b-navbar-nav class="ml-auto" right>
+          <b-navbar-nav v-if="!session">
             <b-nav-item :to="{ name: 'PaginaAcceder' }">Acceder</b-nav-item>
             <b-nav-item :to="{ name: 'PaginaRegistrarme' }"
               >Registrarme</b-nav-item
             >
           </b-navbar-nav>
 
-          <!-- <b-nav-form>
-            <b-form-input
-              size="sm"
-              class="mr-sm-2"
-              placeholder="Search"
-            ></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit"
-              >Search</b-button
-            >
-          </b-nav-form> -->
-
-          <!-- <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
-          </b-nav-item-dropdown> -->
-
-          <!-- <b-nav-item-dropdown right>
-             Using 'button-content' slot
+          <b-nav-item-dropdown v-if="session">
             <template #button-content>
-              <em>User</em>
+              <em>{{ empleado.nombres }} {{ empleado.apellidos }}</em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-          </b-nav-item-dropdown> -->
+            <b-dropdown-item disabled>Modo: {{ modo[1] }}</b-dropdown-item>
+            <b-dropdown-item>{{ empleado.departamento }}</b-dropdown-item>
+            <b-dropdown-item>{{ empleado.noempleado }}</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+
+        <b-navbar-nav right v-if="session">
+          <b-nav-item :to="{ name: 'PaginaBienvenido' }">
+            <b-avatar
+              src="https://placekitten.com/300/300"
+              size="4em"
+            ></b-avatar>
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -65,6 +56,18 @@
 <script>
 export default {
   name: "NavBar",
+  data() {
+    return {
+      empleado: {
+        nombres: "Juan Carlos",
+        apellidos: "Hernanadez Velazquez",
+        departamento: "Mesero (A&B)",
+        noempleado: "0101010110",
+      },
+      modo: ["Administrador", "Empleado"],
+      session: false,
+    };
+  },
 };
 </script>
 
