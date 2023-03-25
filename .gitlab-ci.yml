@@ -12,21 +12,28 @@ cache:
     - node_modules/
 
 before_script:
+  - echo "########## Ejecutando comandos para paso antes de todo (before_script)"
   - npm install
+  - ls -lsa
 
 build:
   stage: build
   script:
+    - echo "########## Ejecutando comandos para paso build"
+    - ls -lsa
     - npm run build
+    - mv public/ public_original/
+    - ls -lsa
 
 deploy:
   stage: deploy
   script:
-    - mv public/ public_tmp/
+    - echo "########## Ejecutando comandos para paso deploy"
+    - ls -lsa
     - mkdir public/
     - mv dist/* public/
   artifacts:
     paths:
-      - dist/
+      - public/
   only:
     - dev
