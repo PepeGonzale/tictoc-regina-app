@@ -38,6 +38,7 @@ deploy:
     - ls -lsa
     - rm -fr tpm_public
     - mv dist/ public/
+    - cd dist
     - ls -lsa
   artifacts:
     paths:
