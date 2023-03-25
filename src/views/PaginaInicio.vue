@@ -58,11 +58,11 @@
               header="Registro de entrada y salida"
               class="text-center"
             >
-              <b-card-text
-                >Accede al sistema para registrar tu entrada y salida del
-                trabajo.</b-card-text
-              >
-              <b-button class="custom-boton">Acceder</b-button>
+              <b-card-text>
+                <span class="mdi mdi-exit-run" style="font-size: 120px;"></span><br />
+                Accede al sistema para registrar tu entrada y salida del
+                trabajo.
+              </b-card-text>
             </b-card>
 
             <b-card
@@ -71,10 +71,10 @@
               class="text-center"
             >
               <b-card-text>
+                <span class="mdi mdi-account-group-outline" style="font-size: 120px;"></span><br />
                 Revisa tu horario de trabajo para saber en qué días y horarios
                 debes estar presente.</b-card-text
               >
-              <b-button class="custom-boton">Acceder</b-button>
             </b-card>
 
             <b-card
@@ -83,17 +83,27 @@
               class="text-center"
             >
               <b-card-text
-                >Si necesitas ayuda o tienes alguna duda, contacta con el
+                >
+                <span class="mdi mdi-face-agent" style="font-size: 120px;"></span><br />
+                Si necesitas ayuda o tienes alguna duda, contacta con el
                 departamento de recursos humanos.</b-card-text
               >
-              <b-button class="custom-boton">Acceder</b-button>
             </b-card>
           </b-card-group>
         </div>
       </div>
     </div>
 
-      <iframe class="mt-3" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14933.2155949112!2d-105.2489107!3d20.6572117!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842145b84bc90a43%3A0xd460ef9aa6d9f1c!2sClub%20Regina%20Puerto%20Vallarta!5e0!3m2!1ses-419!2smx!4v1679700352915!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe
+      class="mt-3"
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14933.2155949112!2d-105.2489107!3d20.6572117!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842145b84bc90a43%3A0xd460ef9aa6d9f1c!2sClub%20Regina%20Puerto%20Vallarta!5e0!3m2!1ses-419!2smx!4v1679700352915!5m2!1ses-419!2smx"
+      width="100%"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
   </div>
 </template>
 
