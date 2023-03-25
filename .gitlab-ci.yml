@@ -9,7 +9,6 @@ pages: # the job must be named pages
     - mv public public-vue 
     - mv dist public 
     - ls public
-    - ls public/files
     # optionally, you can activate gzip support with the following line:
     - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
   artifacts:
