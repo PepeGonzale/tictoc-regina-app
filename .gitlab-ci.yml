@@ -1,0 +1,19 @@
+# .gitlab-ci.yml file to be placed in the root of your repository
+
+pages: # the job must be named pages
+  image: node:14.18.1
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+    - mv public public-vue 
+    - mv dist public 
+    - ls public
+    - ls public/files
+    # optionally, you can activate gzip support with the following line:
+    - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
+  artifacts:
+    paths:
+      - public
+  only:
+    - dev
