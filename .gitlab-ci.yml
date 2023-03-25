@@ -41,6 +41,8 @@ deploy:
     - mv dist public
     # optionally, you can activate gzip support with the following line:
     - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
+    - cd public
+    - ls -lsa
   artifacts:
     paths:
       - public/
