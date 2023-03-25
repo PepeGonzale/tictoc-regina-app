@@ -4,6 +4,7 @@ image: node:14.18.1
 
 stages:
   - build
+  - prepare
   - deploy
 
 cache:
@@ -16,30 +17,46 @@ before_script:
   - npm install
   - ls -lsa
 
+# Este paso verifica si se puede construir
+# la carpeta dist usando el comando `npm run build`
 build:
   stage: build
   script:
     - echo "########## Ejecutando comandos para paso build"
-    - ls -lsa
     - npm run build
-    - mv public/ tpm_public/
+    - ls -lsa
+
+# Este paso construye la carpeta dist
+# y renombrar la carpeta public a rm_public
+# Se lleva la carpeta dist al siguiente paso
+prepare:
+  stage: prepare
+  script:
+    - echo "########## Ejecutando comandos para paso build"
+    - npm run build
+    - mv public rm_public
+    - cd dist
+    - ls -lsa
+    - cd ..
     - ls -lsa
   artifacts:
     paths:
-      - tpm_public/
       - dist
 
+# Este paso lo que hace es reutilizar la carpeta dist
+# Se renombra la carpeta dist por public
+# Si existe una carpeta public lo elimina
+# Se lleva la carpeta public a producción
 deploy:
   stage: deploy
   dependencies:
-    - build
+    - prepare
   script:
     - echo "########## Ejecutando comandos para paso deploy"
-    - ls -lsa
-    - rm -fr tpm_public
-    - mv dist/ public/
-    - cd dist
-    - ls -lsa
+    - rm -rf public
+    - mv dist public
+    # optionally, you can activate gzip support with the following line:
+    - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
   artifacts:
     paths:
       - public/
