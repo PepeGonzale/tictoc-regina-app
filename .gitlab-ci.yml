@@ -22,10 +22,12 @@ build:
     - echo "########## Ejecutando comandos para paso build"
     - ls -lsa
     - npm run build
+    - mv public/ tpm_public/
     - ls -lsa
   artifacts:
     paths:
-      - public/
+      - tpm_public/
+      - dist
 
 deploy:
   stage: deploy
@@ -33,8 +35,8 @@ deploy:
     - build
   script:
     - echo "########## Ejecutando comandos para paso deploy"
-    - rm -fr public
     - ls -lsa
+    - rm -fr tpm_public
     - mv dist/ public/
     - ls -lsa
   artifacts:
