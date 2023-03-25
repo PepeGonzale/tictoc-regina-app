@@ -22,9 +22,11 @@ build:
 deploy:
   stage: deploy
   script:
+    - mv public/ public_tmp/
+    - mkdir public/
     - mv dist/* public/
   artifacts:
     paths:
-      - public/
+      - dist/
   only:
     - dev
