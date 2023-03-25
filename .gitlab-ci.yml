@@ -22,16 +22,21 @@ build:
     - echo "########## Ejecutando comandos para paso build"
     - ls -lsa
     - npm run build
-    - mv public/ public_original/
     - ls -lsa
+  artifacts:
+    paths:
+      - public/
 
 deploy:
   stage: deploy
+  dependencies:
+    - build
   script:
     - echo "########## Ejecutando comandos para paso deploy"
+    - rm -fr public
     - ls -lsa
-    - mkdir public/
-    - mv dist/* public/
+    - mv dist/ public/
+    - ls -lsa
   artifacts:
     paths:
       - public/
