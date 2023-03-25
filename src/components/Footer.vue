@@ -8,11 +8,11 @@
         </div>
         <div class="col-sm-6">
           <h4>Redes Sociales</h4>
-          <ul class="list-unstyled">
-            <li><a href="https://www.facebook.com/RaintreeVacationClub/">Facebook</a></li>
-            <li><a href="https://www.youtube.com/user/raintreevacationclub">Youtube</a></li>
-            <li><a href="https://www.instagram.com/raintreevacationclub/">Instagram</a></li>
-            <li><a href="https://www.raintreevacationclub.com/es/vacation-resorts/mexico/puerto-vallarta/club-regina-puerto-vallarta/">Sitio Web</a></li>
+          <ul class="list-unstyled rrss-h" >
+            <li class="rrss"><span class="mdi mdi-facebook mdi-24px"></span><a href="https://www.facebook.com/RaintreeVacationClub/">Facebook</a></li>
+            <li class="rrss"><span class="mdi mdi-youtube mdi-24px"></span><a href="https://www.youtube.com/user/raintreevacationclub">Youtube</a></li>
+            <li class="rrss"><span class="mdi mdi-instagram mdi-24px"></span><a href="https://www.instagram.com/raintreevacationclub/">Instagram</a></li>
+            <li class="rrss"><span class="mdi mdi-web mdi-24px"></span><a href="https://www.raintreevacationclub.com/es/vacation-resorts/mexico/puerto-vallarta/club-regina-puerto-vallarta/">Sitio Web</a></li>
           </ul>
         </div>
       </div>
@@ -63,5 +63,22 @@ ul li a:hover {
 
 hr {
   border-top: 1px solid #ddd;
+}
+
+.rrss-h {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.rrss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 </style>
