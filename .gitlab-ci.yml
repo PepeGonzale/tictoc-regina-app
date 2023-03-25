@@ -13,47 +13,31 @@ cache:
     - node_modules/
 
 before_script:
-  - echo "########## Ejecutando comandos para paso antes de todo (before_script)"
+  - echo "########## Instalando dependencias node js"
   - npm install
-  - ls -lsa
 
-# Este paso verifica si se puede construir
-# la carpeta dist usando el comando `npm run build`
 build:
   stage: build
   script:
-    - echo "########## Ejecutando comandos para paso build"
+    - echo "########## Se contruye el proyecto, creando carpeta dist"
     - npm run build
-    - ls -lsa
 
-# Este paso construye la carpeta dist
-# y renombrar la carpeta public a rm_public
-# Se lleva la carpeta dist al siguiente paso
 prepare:
   stage: prepare
   script:
-    - echo "########## Ejecutando comandos para paso build"
+    - echo "########## Se contruye el proyecto, creando carpeta dist"
     - npm run build
-    - mv public rm_public
-    - cd dist
-    - ls -lsa
-    - cd ..
-    - ls -lsa
-  artifacts:
-    paths:
-      - dist
+    - echo "########## Se elimina la carpeta public"
+    - rm -rf public
 
-# Este paso lo que hace es reutilizar la carpeta dist
-# Se renombra la carpeta dist por public
-# Si existe una carpeta public lo elimina
-# Se lleva la carpeta public a producción
 deploy:
   stage: deploy
-  dependencies:
-    - prepare
   script:
-    - echo "########## Ejecutando comandos para paso deploy"
+    - echo "########## Se contruye el proyecto, creando carpeta dist"
+    - npm run build
+    - echo "########## Se elimina la carpeta public"
     - rm -rf public
+    - echo "########## Se renombra la carpeta dist a public"
     - mv dist public
     # optionally, you can activate gzip support with the following line:
     - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
