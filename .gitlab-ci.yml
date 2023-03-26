@@ -1,46 +1,16 @@
-# .gitlab-ci.yml file to be placed in the root of your repository
-
-image: node:14.18.1
-
-stages:
-  - build
-  - prepare
-  - deploy
-
-before_script:
-  - echo "########## Instalando dependencias node js"
-  - npm ci
-  - npm install
-
-build:
-  stage: build
-  script:
-    - echo "########## Se contruye el proyecto, creando carpeta dist"
-    - npm run build
-
-prepare:
-  stage: prepare
-  script:
-    - echo "########## Se contruye el proyecto, creando carpeta dist"
-    - npm run build
-    - echo "########## Se elimina la carpeta public"
-    - rm -rf public
-
-deploy:
+pages: # the job must be named pages
+  image: node:latest
   stage: deploy
   script:
-    - echo "########## Se contruye el proyecto, creando carpeta dist"
+    - npm ci
     - npm run build
-    - echo "########## Se elimina la carpeta public"
-    - rm -rf public
-    - echo "########## Se renombra la carpeta dist a public"
-    - mv dist public
+    - mv public public-vue 
+    - mv dist public 
     # optionally, you can activate gzip support with the following line:
     - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
-    - cd public
-    - ls -lsa
   artifacts:
     paths:
-      - public/
+      - public
   only:
     - dev
+
