@@ -2,7 +2,7 @@
   <div>
     <b-navbar toggleable="lg" type="dark" class="navbar-custom fixed-top">
       <b-navbar-brand
-        href="/"
+        :to="{ name: 'PaginaInicio' }"
         class="d-flex align-items-center justify-content-center"
       >
         <img
