@@ -10,7 +10,7 @@
           class="d-inline-block align-top"
           alt="Tick Tock Regina"
         />
-        <span>Tick Tock Regina</span>
+        <span>TicToc Club Regina</span>
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
