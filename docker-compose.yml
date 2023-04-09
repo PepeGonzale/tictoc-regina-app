@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  # Proyecto de MEVRN
+  service_app:
+    container_name: tictoc-regina-app
+    restart: always
+    build:
+      context: ./tictoc-regina-app
+      dockerfile: tictoc-regina-app.Dockerfile
+    volumes:
+      - /home/max98/workspace/tictoc-regina-app
+      - /home/max98/workspace/tictoc-regina-app/node_modules
+    ports:
+      - "3066:3066"
+    environment:
+      PORT: 3066  
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3066"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    command: npm run serve
+
+networks:
+  app-network:
+    driver: bridge

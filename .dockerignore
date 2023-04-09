@@ -1,0 +1,3 @@
+.vagrant/
+.git/
+tictoc-regina-app/node_modules
