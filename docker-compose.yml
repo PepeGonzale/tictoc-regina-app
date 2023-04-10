@@ -7,7 +7,7 @@ services:
     restart: always
     build:
       context: ./tictoc-regina-app
-      dockerfile: tictoc-regina-app.Dockerfile
+      dockerfile: Dockerfile
     volumes:
       - /home/max98/workspace/tictoc-regina-app
       - /home/max98/workspace/tictoc-regina-app/node_modules

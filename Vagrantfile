@@ -6,7 +6,7 @@
 
 Vagrant.configure("2") do |config|
     # Establecer el nombre de la caja 
-    config.vm.define "box-tictoc-regina-app"
+    config.vm.define "box-tictoc-regina-app-nginx"
     #config.vm.hostname = "abc"
 
     # Usar la caja de Ubuntu 18.04LTS
@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     # *OJO* : Corre solo una vez usando `vagrant up`
     config.vm.provision "install-docker",
         type: "docker",
-        images: ["node:16.20-slim"]
+        images: ["node:16.20-slim", "node:14.21.3-slim", "nginx"]
     
     #config.vm.provider "vmware_fusion" do |v|
     #    v.vmx["vhv.enable"] = "TRUE"

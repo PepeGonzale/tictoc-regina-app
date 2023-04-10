@@ -1,4 +1,5 @@
-FROM node:16.20-slim
+#### Proyecto
+FROM node:14.21.3-slim as build-stage
 
 ENV PORT=$PORT
 
@@ -22,6 +23,17 @@ COPY . .
 RUN echo 'PORT=$PORT'
 RUN echo 'WORK_SPACE=$WORK_SPACE'
 
+RUN npm run build
+
+#### Servidor
+FROM nginx as production-stage
+
+RUN mkdir /app
+
+COPY --from=build-stage ./dist /app
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE $PORT
 
-CMD ["npm","run","serve"]
+CMD ["nginx", "-g", "daemon off;"]
