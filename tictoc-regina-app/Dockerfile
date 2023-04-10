@@ -13,6 +13,10 @@ WORKDIR $WORK_SPACE
 
 COPY package*.json $WORK_SPACE
 
+RUN npm install -g dotenv
+
+#RUN apt-get update && apt-get install -y npm
+
 RUN npm install 
 
 COPY . .
@@ -28,12 +32,12 @@ RUN npm run build
 #### Servidor
 FROM nginx as production-stage
 
-RUN mkdir /app
+RUN mkdir -p /app
 
-COPY --from=build-stage ./dist /app
+COPY --from=build-stage /home/max98/workspace/tictoc-regina-app/dist /app
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE $PORT
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

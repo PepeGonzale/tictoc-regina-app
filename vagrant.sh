@@ -7,6 +7,6 @@ cd /home/vagrant/workspace
 ls -lsa
 docker-compose stop
 docker-compose rm --force
-docker-compose build
+docker-compose build --no-cache
 docker-compose up -d
 echo "[...] Provision finalizado exitosamente ! [...]"

@@ -6,7 +6,7 @@
 
 Vagrant.configure("2") do |config|
     # Establecer el nombre de la caja 
-    config.vm.define "box-tictoc-regina-app-nginx"
+    config.vm.define "box-dev-ngnix-tictoc-regina-app"
     #config.vm.hostname = "abc"
 
     # Usar la caja de Ubuntu 18.04LTS
@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
 
     # Configuración de red
     #config.vm.network "public_network"
-    #config.vm.network "forwarded_port", guest: 80, host: 8080
+    config.vm.network "forwarded_port", guest: 80, host: 8080
     
     # Montar el dicrectorio actual a la ruta absoluta
     config.vm.synced_folder "./", "/home/vagrant/workspace"
@@ -25,8 +25,16 @@ Vagrant.configure("2") do |config|
     # Exponer el puerto interior de la caja ** Para Proyecto React **
     config.vm.network "forwarded_port", guest: 3066 , host: 3066, auto_correct: true
     
+    config.vm.provision :shell, inline: "sudo timedatectl set-timezone America/Mexico_City"
+
+    # Actualizar zona horaria de la caja de Ubuntu 18.04LTS
+    # En esta configuración, estamos usando el comando 'timedatectl'
+    # para establecer la zona horaria, habilitar el control de sincronización de la hora con NTP
+    # y deshabilitar el reloj de tiempo local (RTC) en el hardware del sistema.
+    config.vm.provision "shell", inline: "sudo timedatectl set-timezone America/Mexico_City && sudo timedatectl set-ntp on && sudo timedatectl set-local-rtc 0"
+    
     # Actualizar repositorio la caja de Ubuntu 18.04LTS
-    config.vm.provision :shell, inline: "sudo apt-get install -y ntp && sudo service ntp restart && sudo apt-get update -qq -y"
+    config.vm.provision :shell, inline: "sudo apt-get update -qq -y"
     
     # Instalar docker y descagar imagen de docker (node:16.20-slim)
     # *OJO* : Corre solo una vez usando `vagrant up`
