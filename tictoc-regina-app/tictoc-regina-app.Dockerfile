@@ -32,12 +32,12 @@ RUN npm run build
 #### Servidor
 FROM nginx as production-stage
 
-RUN mkdir -p /app
+RUN mkdir -p /usr/share/nginx/html/tictoc-clubregina
 
-COPY --from=build-stage /home/max98/workspace/tictoc-regina-app/dist /app
+COPY --from=build-stage /home/max98/workspace/tictoc-regina-app/dist /usr/share/nginx/html/tictoc-clubregina
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+EXPOSE $PORT 80
 
 CMD ["nginx", "-g", "daemon off;"]

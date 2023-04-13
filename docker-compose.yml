@@ -6,6 +6,6 @@ services:
     container_name: service_app
     build:
       context: ./tictoc-regina-app
-      dockerfile: Dockerfile
+      dockerfile: tictoc-regina-app.Dockerfile
     ports:
       - "3066:80"
