@@ -13,7 +13,12 @@
           <b-col md="6">
             <b-card-body title="Registrarme" class="p-titulo">
               <div>
-                <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+                <b-form
+                  @submit="onSubmit"
+                  @reset="onReset"
+                  v-if="show"
+                  id="formRegistrarEmpleado"
+                >
                   <b-form-group id="input-formRegistrarme-nombres-empleado">
                     <b-form-input
                       id="input-formRegistrarme-nombres-empleado"
@@ -32,7 +37,9 @@
                     ></b-form-input>
                   </b-form-group>
 
-                  <b-form-group id="input-formRegistrarme-departamento-empleado">
+                  <b-form-group
+                    id="input-formRegistrarme-departamento-empleado"
+                  >
                     <b-form-input
                       id="input-formRegistrarme-departamento-empleado"
                       v-model="formRegistrarme.departamento"
@@ -50,7 +57,7 @@
                     <b-form-input
                       id="input-formRegistrarme-numero-empleado"
                       type="number"
-                      v-model="formRegistrarme.noempleado"
+                      v-model="formRegistrarme.numEmpleado"
                       placeholder="Ingrese número de empleado..."
                       required
                     ></b-form-input>
@@ -110,6 +117,8 @@
 </template>
 
 <script>
+import UsuarioService from "../servicies/UsuarioService"
+
 export default {
   name: "PaginaAcceder",
   data() {
@@ -119,8 +128,8 @@ export default {
         nombres: "",
         apellidos: "",
         departamento: "",
-        noempleado: "",
-        password: ""
+        numEmpleado: "",
+        password: "",
       },
       foods: [
         { text: "Select One", value: null },
@@ -143,7 +152,27 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      console.log( this.formRegistrarme );
+
+      const nuevoEmpleado = {
+        nombres: this.formRegistrarme.nombres,
+        apellidos: this.formRegistrarme.apellidos,
+        departamento: this.formRegistrarme.departamento,
+        numEmpleado: this.formRegistrarme.numEmpleado,
+        correo: this.formRegistrarme.correo,
+        contrasenha: this.formRegistrarme.constrasenha,
+      }
+
+      UsuarioService.createUsuario(nuevoEmpleado)
+      .then(
+        (resp) => {
+          let response = resp.data;
+          alert(response.message);
+        }
+      )
+      .catch((error) => {
+        alert(error);
+      });      
     },
     onReset(event) {
       event.preventDefault();

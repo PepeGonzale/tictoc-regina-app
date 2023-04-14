@@ -17,7 +17,7 @@
                   <b-form-group id="input-group-1" label-for="input-1">
                     <b-form-input
                       id="input-1"
-                      v-model="formAcceder.noempleado"
+                      v-model="formAcceder.numEmpleado"
                       type="type"
                       placeholder="Ingrese su número de empleado..."
                       required
@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       formAcceder: {
-        noempleado: "",
+        numEmpleado: "",
         password: ""
       },
       show: true,
