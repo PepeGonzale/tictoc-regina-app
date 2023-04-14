@@ -29,6 +29,10 @@ class UsuarioService {
         return axios.get(`${BASE_URL_TICTOC_CLUBREGINA_API}/search/${mascotaNombre}`);
     }
 
+    getEmpleadoByNumEmpleado(numEmpleado){
+        return axios.get(`${BASE_URL_TICTOC_CLUBREGINA_API}/s/numEmpleado/${numEmpleado}`);
+    }
+
     updateMascota(mascota, mascotaId){
         return axios.put(`${BASE_URL_TICTOC_CLUBREGINA_API}/${mascotaId}`, mascota);
     }

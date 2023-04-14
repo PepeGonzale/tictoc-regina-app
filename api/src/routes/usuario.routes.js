@@ -106,7 +106,7 @@ router.get(`${API}/s/apellidos/:apellidos`, async (req, resp, next) => {
 router.get(`${API}/s/numEmpleado/:numEmpleado`, async (req, resp, next) => {
     try {
         const numEmpleado = req.params.numEmpleado;
-        const data = await Usuario.find({numEmpleado: new RegExp(numEmpleado)}).exec();
+        const data = await Usuario.findOne({numEmpleado: numEmpleado}).exec();
 
         resp.status(200).send({status:200, message:'Usuario obtenida', data: data});
     } catch (error) {
