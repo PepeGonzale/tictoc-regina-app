@@ -4,22 +4,17 @@ const nombres = {type: 'String', require: true};
 
 const apellidos = {type: 'String', require: true};
 
-const edad = {type: 'Number', require: true};
+const departamento = {type: 'String', require: true};
 
-// Crear un objetos de todas las enfermedades
-/* const SchemaEnfermedades = mongoose.Schema({ 
-    id: {type: 'Number', require: false},
-    enfermedad: {type: 'String', require: false}
-},{_id:false});
+const numEmpleado = {type: 'String', require: true};
 
-const enfermedades = {type: [SchemaEnfermedades], require: false, default: undefined} 
-*/
+const correo = {type: 'String', require: true};
 
-// const enfermedades = [{type: 'String', require: false}];
+const contrasenha = {type: 'String', require: true};
 
 // Crear modelo
 const SchemaUsuario = mongoose.Schema(
-    {nombres, apellidos, edad}, 
+    {nombres, apellidos, departamento, numEmpleado, correo, contrasenha},
     {timestamps: true, versionKey: false}
 );
 

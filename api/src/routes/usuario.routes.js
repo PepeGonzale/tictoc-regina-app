@@ -5,10 +5,10 @@ const API = '/api/v1/tictoc-clubregina/usuario';
 // Crear
 router.post(`${API}/`, async (req, resp, next) => {
     try {
-        const {nombres, apellidos, edad} = req.body;
+        const {nombres, apellidos, departamento, numEmpleado, correo, contrasenha} = req.body;
 
         const mascota = new Usuario({
-            nombres, apellidos, edad
+            nombres, apellidos, departamento, numEmpleado, correo, contrasenha
         });
 
         const data = await mascota.save();
@@ -38,10 +38,10 @@ router.delete(`${API}/:_id`, async (req, resp, next) => {
 router.put(`${API}/:_id`, async (req, resp, next) => {
     try {
         const _id = req.params._id;
-        const {nombres, apellidos, edad} = req.body;
+        const {nombres, apellidos, departamento, numEmpleado, correo, contrasenha} = req.body;
 
         const data = await Usuario.findByIdAndUpdate(_id,{
-            nombres, apellidos, edad
+            nombres, apellidos, departamento, numEmpleado, correo, contrasenha
         });
 
         resp.send({status:200, message:'Usuario modificada', data: data});
@@ -102,11 +102,11 @@ router.get(`${API}/s/apellidos/:apellidos`, async (req, resp, next) => {
     }
 });
 
-// Buscar por edad
-router.get(`${API}/s/edad/:edad`, async (req, resp, next) => {
+// Buscar por no. empleado
+router.get(`${API}/s/numEmpleado/:numEmpleado`, async (req, resp, next) => {
     try {
-        const edad = req.params.edad;
-        const data = await Usuario.find({edad: { $gt : edad}}).exec();
+        const numEmpleado = req.params.numEmpleado;
+        const data = await Usuario.find({numEmpleado: new RegExp(numEmpleado)}).exec();
 
         resp.status(200).send({status:200, message:'Usuario obtenida', data: data});
     } catch (error) {
@@ -114,6 +114,5 @@ router.get(`${API}/s/edad/:edad`, async (req, resp, next) => {
         next(error);
     }
 });
-
 
 module.exports = router;
