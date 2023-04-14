@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import UsuarioService from "../servicies/UsuarioService"
+import UsuarioService from "../servicies/UsuarioService";
 
 export default {
   name: "PaginaAcceder",
@@ -160,7 +160,7 @@ export default {
         departamento: this.formRegistrarme.departamento,
         numEmpleado: this.formRegistrarme.numEmpleado,
         correo: this.formRegistrarme.correo,
-        contrasenha: this.formRegistrarme.constrasenha,
+        contrasenha: this.formRegistrarme.password,
       }
 
       UsuarioService.createUsuario(nuevoEmpleado)
@@ -172,6 +172,7 @@ export default {
       )
       .catch((error) => {
         alert(error);
+        console.log("Error : UsuarioService.createUsuario(nuevoEmpleado) >> ",error);
       });      
     },
     onReset(event) {

@@ -64,6 +64,8 @@
 </template>
 
 <script>
+import UsuarioService from "../servicies/UsuarioService";
+
 export default {
   name: "PaginaAcceder",
   data() {
@@ -78,7 +80,22 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+
+      // Obtener los datos de un empleado con su numero de empleado
+      UsuarioService.getEmpleadoByNumEmpleado(this.formAcceder.numEmpleado).then(
+        (resp) => {
+          let { contrasenha } = resp.data.data;
+
+          if( contrasenha === this.formAcceder.password ){
+            this.$router.push({ name: 'PaginaBienvenido' });
+          }
+        }
+      )
+      .catch((error) => {
+        alert(error);
+        console.log("Error : UsuarioService.createUsuario(nuevoEmpleado) >> ",error);
+      });
+
     },
     onReset(event) {
       event.preventDefault();
