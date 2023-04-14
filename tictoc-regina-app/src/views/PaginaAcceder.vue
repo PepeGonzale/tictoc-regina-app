@@ -17,7 +17,7 @@
                   <b-form-group id="input-group-1" label-for="input-1">
                     <b-form-input
                       id="input-1"
-                      v-model="formAcceder.noempleado"
+                      v-model="formAcceder.numEmpleado"
                       type="type"
                       placeholder="Ingrese su número de empleado..."
                       required
@@ -64,12 +64,14 @@
 </template>
 
 <script>
+import UsuarioService from "../servicies/UsuarioService";
+
 export default {
   name: "PaginaAcceder",
   data() {
     return {
       formAcceder: {
-        noempleado: "",
+        numEmpleado: "",
         password: ""
       },
       show: true,
@@ -78,7 +80,22 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+
+      // Obtener los datos de un empleado con su numero de empleado
+      UsuarioService.getEmpleadoByNumEmpleado(this.formAcceder.numEmpleado).then(
+        (resp) => {
+          let { contrasenha } = resp.data.data;
+
+          if( contrasenha === this.formAcceder.password ){
+            this.$router.push({ name: 'PaginaBienvenido' });
+          }
+        }
+      )
+      .catch((error) => {
+        alert(error);
+        console.log("Error : UsuarioService.createUsuario(nuevoEmpleado) >> ",error);
+      });
+
     },
     onReset(event) {
       event.preventDefault();

@@ -36,7 +36,7 @@
             </template>
             <b-dropdown-item disabled>Modo: {{ modo[1] }}</b-dropdown-item>
             <b-dropdown-item>{{ empleado.departamento }}</b-dropdown-item>
-            <b-dropdown-item>{{ empleado.noempleado }}</b-dropdown-item>
+            <b-dropdown-item>{{ empleado.numEmpleado }}</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
@@ -62,7 +62,7 @@ export default {
         nombres: "Juan Carlos",
         apellidos: "Hernanadez Velazquez",
         departamento: "Mesero (A&B)",
-        noempleado: "0101010110",
+        numEmpleado: "0101010110",
       },
       modo: ["Administrador", "Empleado"],
       session: false,
