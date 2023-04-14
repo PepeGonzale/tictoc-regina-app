@@ -22,8 +22,11 @@ Vagrant.configure("2") do |config|
     # Montar el dicrectorio actual a la ruta absoluta
     config.vm.synced_folder "./", "/home/vagrant/workspace"
     
-    # Exponer el puerto interior de la caja ** Para Proyecto React **
+    # Exponer el puerto interior de la caja ** Para Proyecto App | VueJS **
     config.vm.network "forwarded_port", guest: 3066 , host: 3066, auto_correct: true
+
+    # Exponer el puerto interior de la caja ** Para Proyecto API | Node + Express **
+    config.vm.network "forwarded_port", guest: 3069 , host: 3069, auto_correct: true
     
     config.vm.provision :shell, inline: "sudo timedatectl set-timezone America/Mexico_City"
 
@@ -34,7 +37,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", inline: "sudo timedatectl set-timezone America/Mexico_City && sudo timedatectl set-ntp on && sudo timedatectl set-local-rtc 0"
     
     # Actualizar repositorio la caja de Ubuntu 18.04LTS
-    config.vm.provision :shell, inline: "sudo apt-get update -qq -y"
+    #config.vm.provision :shell, inline: "sudo apt-get update -qq -y"
     
     # Instalar docker y descagar imagen de docker (node:16.20-slim)
     # *OJO* : Corre solo una vez usando `vagrant up`

@@ -3,6 +3,5 @@
 tictoc-regina-app/node_modules
 api/node_modules
 data/
-*data*
 node_modules
 *node_modules*
