@@ -21,6 +21,16 @@ Content-Type: application/json
     "apellidos": "Developer", 
     "departamento": "Developer",
     "numEmpleado" : "0",
-    "correo" : "developer-0@example.com",
+    "correo" : "developer-11@example.com",
+    "contrasenha" : "secret"    
+}
+
+### Ingresar con un empleado
+POST {{api}}/ingresar
+Access-Control-Allow-Origin: http://localhost:3066
+Content-Type: application/json
+
+{
+    "correo" : "developer-11@example.com",
     "contrasenha" : "secret"    
 }

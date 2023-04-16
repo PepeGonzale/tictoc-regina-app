@@ -28,8 +28,7 @@ passport.use(
 
 // Configurando una estrategia de autenticación de Passport.js
 // llamada `registrar_empleado` 
-passport.use(
-    'registrar_empleado',
+passport.use('registrar_empleado',
     // Especifiar a la estrategia cual es el campo para username y password 
     new localStrategy({
         usernameField: 'correo',
@@ -66,3 +65,39 @@ passport.use(
             }
         })
 );
+
+// Configurando una estrategia de autenticación de Passport.js
+// llamada `ingresar_empleado` 
+passport.use('ingresar_empleado',
+    // Especifiar a la estrategia cual es el campo para username y password 
+    new localStrategy({
+        usernameField: 'correo',
+        passwordField: 'contrasenha',
+    },
+        // Recibir parametros nombres, correo, contrasenha en el body de la petición
+        async (correo, contrasenha, done) => {
+            console.log("localStrategy : ingresar_empleado");
+
+            try {
+                // Buscar un empleado con el correo
+                const empleado = await EmpleadoModel.findOne({ correo });
+
+                // Si el empleado no existe, retorna un error
+                if (!empleado)
+                    return done(null, false, { message: `Empleado con correo ${correo} no existe` });
+
+                // Verificar la contraseña encriptada
+                const validar = await empleado.matchContrasenha(contrasenha);
+
+                // Si la contraseña no coincide, retorna un error
+                if (!validar)
+                    return done(null, false, { message: `La contraseña ${contrasenha} es incorrecto.` });
+
+                // Retorna los datos del empleado logeado
+                return done(null, { user: empleado }, { message: 'Empleado ingreso exitosamente.' });
+
+            } catch (error) {
+                return done(error);
+            }
+        })
+)

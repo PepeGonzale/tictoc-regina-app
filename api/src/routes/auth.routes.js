@@ -34,4 +34,61 @@ router.post('/registrar',
     }
 );
 
+// EndPoint para ingresar un empleado
+router.post('/ingresar',
+    async (req, resp, next) => {
+        // [...] Código de ejecución [...]
+
+        // Utilizar configuración de estrategia 'ingresar_empleado'
+        // configurado en @/config/auth.js
+        passport.authenticate('ingresar_empleado', { session: false },
+            async (err, user, info) => {
+                // [...] Código de ejecución [...]
+
+                try {
+                    const message = info.message;
+
+                    // Si ingresar_empleado devuelve un error y un user vacio
+                    if (err || !user) {
+                        // retorna un error
+                        const error = new Error('Hubo un error en la autenticacion.');
+                        //return next(error);
+                        return resp.json({
+                            path: '/auth/ingresar',
+                            status: 'failure',
+                            error: error.message,
+                            message,
+                        });
+                    }
+
+                    // De lo contrario se hace login y se genera un token
+                    req.login(
+                        user,
+                        { session: false },
+                        async (error) => {
+                            if (error) return next(error);
+
+                            const body = { _id: user._id, correo: user.correo };
+                            const token = jwt.sign({ user: body }, process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x');
+
+                            // retorna token
+                            return resp.json({
+                                path: '/auth/ingresar',
+                                status: 'success',
+                                token,
+                                message,
+                            });
+                        }
+                    );
+
+                } catch (error) {
+                    return next(error);
+                }
+
+            }
+        )(req, resp, next);
+    }
+);
+
+
 module.exports = router;
