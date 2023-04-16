@@ -5,7 +5,7 @@ const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 // Configurando una estrategia de autenticación de Passport.js
-// llamada `default` 
+// llamada `default` que sirve como generar y verificar token
 passport.use(
     // Crear un estrategia para verificar y generar token
     new JWTstrategy({
@@ -27,9 +27,9 @@ passport.use(
 );
 
 // Configurando una estrategia de autenticación de Passport.js
-// llamada `registrar_empleado` 
+// llamada `registrar_empleado` que sirve como singup
 passport.use('registrar_empleado',
-    // Especifiar a la estrategia cual es el campo para username y password 
+    // Especifiar a la estrategia cual es el campo para correo y password 
     new localStrategy({
         usernameField: 'correo',
         passwordField: 'contrasenha',
@@ -67,9 +67,9 @@ passport.use('registrar_empleado',
 );
 
 // Configurando una estrategia de autenticación de Passport.js
-// llamada `ingresar_empleado` 
+// llamada `ingresar_empleado` que sirve como login
 passport.use('ingresar_empleado',
-    // Especifiar a la estrategia cual es el campo para username y password 
+    // Especifiar a la estrategia cual es el campo para correo y password 
     new localStrategy({
         usernameField: 'correo',
         passwordField: 'contrasenha',
@@ -101,3 +101,18 @@ passport.use('ingresar_empleado',
             }
         })
 )
+
+
+// Configurando una estrategia de autenticación de Passport.js
+// llamada `ingresar_empleado` que sirve como logout
+passport.use('salir_empleado',
+    new localStrategy({
+        usernameField: 'correo',
+        passwordField: 'contrasenha'
+    },
+        function (correo, contrasenha, done) {
+            // Esta estrategia no requiere autenticación,
+            // por lo que simplemente llamamos a done() sin argumentos.
+            return done();
+        })
+);

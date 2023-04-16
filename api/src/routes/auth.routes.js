@@ -90,5 +90,15 @@ router.post('/ingresar',
     }
 );
 
+// Ruta de logout
+router.post('/salir',
+    passport.authenticate('salir_empleado', { session: false }),
+    function (req, res) {
+        // Cerrar sesión del usuario actual
+        req.logout();
+        // Respondemos con un mensaje de éxito
+        res.json({ message: 'Logout exitoso' });
+    }
+);
 
 module.exports = router;
