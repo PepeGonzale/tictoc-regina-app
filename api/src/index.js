@@ -7,6 +7,9 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const app = express();
 
+// Enlace para consumir api
+const BASE_URL_API = '/api/v1/tictoc-clubregina';
+
 var corsOptions = {
     origin: process.env.API_CORS_ORIGIN || "http://localhost:3000",
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -28,7 +31,7 @@ app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false}));
 
-app.use(usuarioRouters);
+app.use(`${BASE_URL_API}/usuario`,usuarioRouters);
 
 // * Aplicación
 const server = app.listen(app.get('port'), () => {

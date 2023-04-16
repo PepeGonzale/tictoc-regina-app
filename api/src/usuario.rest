@@ -1,0 +1,40 @@
+@api = http://localhost:3069/api/v1/tictoc-clubregina/usuario
+
+@_id = 643c3a8a1b8c59afd5353aba
+
+### Listar usuarios
+GET {{api}}
+
+### Crear un usuario
+POST {{api}}
+Content-Type: application/json
+
+{
+    "nombres" : "Usuario Example", 
+    "apellidos" : "Example Example", 
+    "departamento" : "Test", 
+    "numEmpleado" : "101", 
+    "correo" : "usuario@example.com", 
+    "contrasenha" : "secret"
+}
+
+### Consultar una usuario
+GET {{api}}/{{_id}}
+
+
+### Actualizar un usuario
+PUT  {{api}}/{{_id}}
+Content-Type: application/json
+
+{
+    "nombres" : "Usuario Example Updated", 
+    "apellidos" : "Example Example Updated", 
+    "departamento" : "Test Updated", 
+    "numEmpleado" : "101", 
+    "correo" : "usuario@example.updated.com", 
+    "contrasenha" : "secret"
+}
+
+### Eliminar  usuario
+DELETE {{api}}/{{_id}}
+
