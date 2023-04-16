@@ -11,10 +11,9 @@ const EmpleadoSchema = new Schema({
     { timestamps: true, versionKey: false });
 
 // Método de el schema para encriptar contraseñas
-EmpleadoSchema.methods.encrypContrasenha = async (contrasenha) => {
+EmpleadoSchema.methods.encrypContrasenha = async function () {
     const salt = await bcrypt.genSalt(13);
-    const hash = bcrypt.hash(contrasenha, salt);
-    return hash;
+    this.contrasenha = await bcrypt.hash(this.contrasenha, salt);
 };
 
 // Método de el schema para comparar contraseñas

@@ -33,23 +33,34 @@ passport.use(
     // Especifiar a la estrategia cual es el campo para username y password 
     new localStrategy({
         usernameField: 'correo',
-        passwordField: 'contrasenha'
+        passwordField: 'contrasenha',
+        passReqToCallback: true,
+        session: false
     },
         // Recibir parametros nombres, correo, contrasenha en el body de la petición
-        async (nombres, correo, contrasenha, done) => {
+        async (req, correo, contrasenha, done) => {
             console.log("localStrategy : registrar_empleado");
 
             try {
-                // Crear empleado en MongoDB
-                const user = await EmpleadoModel.create({
+                // Desestructurar el cuerpo de la petición
+                const { nombres } = req.body;
+
+                // Crear un modelo de Empleado
+                const nuevoEmpleado = new EmpleadoModel({
                     nombres,
                     correo,
                     contrasenha
                 });
 
+                // Encriptar la contraseña
+                await nuevoEmpleado.encrypContrasenha();
+
+                // Guardar el empleado en mongoDB
+                await nuevoEmpleado.save();
+
                 // Retornar los datos del empleado
                 // usando del objeto user
-                return done(null, user);
+                return done(null, { user: nuevoEmpleado });
             } catch (error) {
                 done(error);
             }
