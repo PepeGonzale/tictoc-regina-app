@@ -1,0 +1,11 @@
+@api = http://localhost:3069/api/v1/tictoc-clubregina/auth
+
+@_id = 643c3a8a1b8c59afd5353aba
+
+### Hacer prueba
+GET {{api}}/test
+Content-Type: application/json
+
+{
+    "msg" : "Esto es una prueba"
+}

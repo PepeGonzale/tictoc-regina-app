@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const _connect = require('./database');
 const usuarioRouters = require('./routes/usuario.routes');
+const authRouters = require('./routes/auth.routes');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const app = express();
@@ -14,6 +15,8 @@ var corsOptions = {
     origin: process.env.API_CORS_ORIGIN || "http://localhost:3000",
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
+
+require('./config/auth');
 
 // Establecer puerto
 app.set('port', process.env.PORT || process.env.API_PORT || 3000);
@@ -30,6 +33,8 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false}));
+
+app.use(`${BASE_URL_API}/auth`, authRouters);
 
 app.use(`${BASE_URL_API}/usuario`,usuarioRouters);
 
