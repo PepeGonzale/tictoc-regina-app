@@ -29,15 +29,15 @@ passport.use(
 // Configurando una estrategia de autenticación de Passport.js
 // llamada `registrar_empleado` que sirve como singup
 passport.use('registrar_empleado',
-    // Especifiar a la estrategia cual es el campo para correo y password 
+    // Especifiar a la estrategia cual es el campo para numero_colaborador y password 
     new localStrategy({
-        usernameField: 'correo',
+        usernameField: 'numero_colaborador',
         passwordField: 'contrasenha',
         passReqToCallback: true,
         session: false
     },
-        // Recibir parametros nombres, correo, contrasenha en el body de la petición
-        async (req, correo, contrasenha, done) => {
+        // Recibir parametros nombres, numero_colaborador, contrasenha en el body de la petición
+        async (req, numero_colaborador, contrasenha, done) => {
             console.log("localStrategy : registrar_empleado");
 
             try {
@@ -47,7 +47,7 @@ passport.use('registrar_empleado',
                 // Crear un modelo de Empleado
                 const nuevoEmpleado = new EmpleadoModel({
                     nombres,
-                    correo,
+                    numero_colaborador,
                     contrasenha
                 });
 
@@ -69,22 +69,22 @@ passport.use('registrar_empleado',
 // Configurando una estrategia de autenticación de Passport.js
 // llamada `ingresar_empleado` que sirve como login
 passport.use('ingresar_empleado',
-    // Especifiar a la estrategia cual es el campo para correo y password 
+    // Especifiar a la estrategia cual es el campo para numero_colaborador y password 
     new localStrategy({
-        usernameField: 'correo',
+        usernameField: 'numero_colaborador',
         passwordField: 'contrasenha',
     },
-        // Recibir parametros nombres, correo, contrasenha en el body de la petición
-        async (correo, contrasenha, done) => {
+        // Recibir parametros nombres, numero_colaborador, contrasenha en el body de la petición
+        async (numero_colaborador, contrasenha, done) => {
             console.log("localStrategy : ingresar_empleado");
 
             try {
-                // Buscar un empleado con el correo
-                const empleado = await EmpleadoModel.findOne({ correo });
+                // Buscar un empleado con el numero_colaborador
+                const empleado = await EmpleadoModel.findOne({ numero_colaborador });
 
                 // Si el empleado no existe, retorna un error
                 if (!empleado)
-                    return done(null, false, { message: `Empleado con correo ${correo} no existe` });
+                    return done(null, false, { message: `Empleado con numero_colaborador ${numero_colaborador} no existe` });
 
                 // Verificar la contraseña encriptada
                 const validar = await empleado.matchContrasenha(contrasenha);
@@ -107,10 +107,10 @@ passport.use('ingresar_empleado',
 // llamada `ingresar_empleado` que sirve como logout
 passport.use('salir_empleado',
     new localStrategy({
-        usernameField: 'correo',
+        usernameField: 'numero_colaborador',
         passwordField: 'contrasenha'
     },
-        function (correo, contrasenha, done) {
+        function (numero_colaborador, contrasenha, done) {
             // Esta estrategia no requiere autenticación,
             // por lo que simplemente llamamos a done() sin argumentos.
             return done();

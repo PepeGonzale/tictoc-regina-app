@@ -68,7 +68,7 @@ router.post('/ingresar',
                         async (error) => {
                             if (error) return next(error);
 
-                            const body = { _id: user._id, correo: user.correo };
+                            const body = { _id: user._id, numero_colaborador: user.numero_colaborador };
                             const token = jwt.sign({ user: body }, process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x');
 
                             // retorna token

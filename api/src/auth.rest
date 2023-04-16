@@ -20,8 +20,8 @@ Content-Type: application/json
     "nombres": "Developer", 
     "apellidos": "Developer", 
     "departamento": "Developer",
-    "numEmpleado" : "0",
-    "correo" : "developer-11@example.com",
+    "numero_colaborador" : "10101",
+    "correo" : "developer-10101@example.com",
     "contrasenha" : "secret"    
 }
 
@@ -31,6 +31,6 @@ Access-Control-Allow-Origin: http://localhost:3066
 Content-Type: application/json
 
 {
-    "correo" : "developer-11@example.com",
+    "numero_colaborador" : "10101",
     "contrasenha" : "secret"    
 }
