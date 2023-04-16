@@ -1,19 +1,16 @@
 import axios from "axios";
 
-const BASE_URL_TICTOC_CLUBREGINA_API = (process.env.BASE_URL_TICTOC_CLUBREGINA_API) 
-    ? process.env.BASE_URL_TICTOC_CLUBREGINA_API 
-    : "http://localhost:3069/api/v1/tictoc-clubregina/usuario";
-    
-axios.defaults.baseURL = BASE_URL_TICTOC_CLUBREGINA_API;
-
 class UsuarioService {
 
+    // API BASE URL (default): http://localhost:3066/api/v1/tictoc-clubregina/usuarios
+    BASE_AXIOS_USUARIO = "/usuario";
+
     getMascotas(){
-        return axios.get(BASE_URL_TICTOC_CLUBREGINA_API);
+        return axios.get(this.BASE_AXIOS_USUARIO);
     }
 
     createUsuario(empleado){
-        return axios.post(BASE_URL_TICTOC_CLUBREGINA_API, empleado, {
+        return axios.post(this.BASE_AXIOS_USUARIO, empleado, {
             headers: {
                 // Overwrite Axios's automatically set Content-Type
                 'Content-Type': 'application/json'
@@ -22,23 +19,23 @@ class UsuarioService {
     }
 
     getMascota(mascotaId){
-        return axios.get(`${BASE_URL_TICTOC_CLUBREGINA_API}/${mascotaId}`);
+        return axios.get(`${this.BASE_AXIOS_USUARIO}/${mascotaId}`);
     }
 
     getSearchMascota(mascotaNombre){
-        return axios.get(`${BASE_URL_TICTOC_CLUBREGINA_API}/search/${mascotaNombre}`);
+        return axios.get(`${this.BASE_AXIOS_USUARIO}/search/${mascotaNombre}`);
     }
 
     getEmpleadoByNumEmpleado(numEmpleado){
-        return axios.get(`${BASE_URL_TICTOC_CLUBREGINA_API}/s/numEmpleado/${numEmpleado}`);
+        return axios.get(`${this.BASE_AXIOS_USUARIO}/s/numEmpleado/${numEmpleado}`);
     }
 
     updateMascota(mascota, mascotaId){
-        return axios.put(`${BASE_URL_TICTOC_CLUBREGINA_API}/${mascotaId}`, mascota);
+        return axios.put(`${this.BASE_AXIOS_USUARIO}/${mascotaId}`, mascota);
     }
 
     deleteMascota(mascotaId){
-        return axios.delete(`${BASE_URL_TICTOC_CLUBREGINA_API}/${mascotaId}`);
+        return axios.delete(`${this.BASE_AXIOS_USUARIO}/${mascotaId}`);
     }
 
 }

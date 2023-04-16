@@ -91,10 +91,10 @@
 
                   <div class="mt-3">
                     <b-button-group>
-                      <b-button type="submit" variant="success"
+                      <b-button type="submit" variant="success" id="btnFormRegistrarmeAceptar"
                         >Dar de alta</b-button
                       >
-                      <b-button type="reset" variant="danger"
+                      <b-button type="reset" variant="danger" id="btnFormRegistrarmeCancelar"
                         >Cancelar</b-button
                       >
                     </b-button-group>
@@ -117,27 +117,20 @@
 </template>
 
 <script>
-import UsuarioService from "../servicies/UsuarioService";
+import AuthService from "../servicies/AuthService";
 
 export default {
   name: "PaginaAcceder",
   data() {
     return {
       formRegistrarme: {
-        correo: "",
-        nombres: "",
-        apellidos: "",
-        departamento: "",
-        numEmpleado: "",
-        password: "",
+        correo: null,
+        nombres: null,
+        apellidos: null,
+        departamento: null,
+        numEmpleado: null,
+        password: null,
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn",
-      ],
       show: true,
       departamentos: [
         "Camarista",
@@ -150,38 +143,35 @@ export default {
     };
   },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
-      console.log( this.formRegistrarme );
+      console.log(this.formRegistrarme);
 
       const nuevoEmpleado = {
         nombres: this.formRegistrarme.nombres,
         apellidos: this.formRegistrarme.apellidos,
         departamento: this.formRegistrarme.departamento,
-        numEmpleado: this.formRegistrarme.numEmpleado,
+        numero_colaborador: this.formRegistrarme.numEmpleado + "",
         correo: this.formRegistrarme.correo,
         contrasenha: this.formRegistrarme.password,
+      };
+
+      const resp = await AuthService.fncRegistrarEmpleado(nuevoEmpleado);
+      const status = resp.data.status;
+      if( status === 200){
+        document.getElementById("btnFormRegistrarmeCancelar").click();
       }
 
-      UsuarioService.createUsuario(nuevoEmpleado)
-      .then(
-        (resp) => {
-          let response = resp.data;
-          alert(response.message);
-        }
-      )
-      .catch((error) => {
-        alert(error);
-        console.log("Error : UsuarioService.createUsuario(nuevoEmpleado) >> ",error);
-      });      
     },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
-      this.formRegistrarme.email = "";
-      this.formRegistrarme.name = "";
-      this.formRegistrarme.food = null;
-      this.formRegistrarme.checked = [];
+      this.formRegistrarme.nombres = null;
+      this.formRegistrarme.apellidos = null;
+      this.formRegistrarme.departamento = null;
+      this.formRegistrarme.numEmpleado = null;
+      this.formRegistrarme.correo = null;
+      this.formRegistrarme.password = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
