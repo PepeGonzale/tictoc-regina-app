@@ -5,7 +5,10 @@ const { Schema } = mongoose;
 // Crear un modelo 
 const EmpleadoSchema = new Schema({
     nombres: { type: 'String', required: true },
+    apellidos: { type: 'String', required: true },
+    departamento: { type: 'String', required: true },
     numero_colaborador: { type: 'String', required: true },
+    correo: { type: 'String', required: true },
     contrasenha: { type: 'String', required: true },
 },
     { timestamps: true, versionKey: false });

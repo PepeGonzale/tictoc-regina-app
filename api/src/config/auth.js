@@ -42,11 +42,18 @@ passport.use('registrar_empleado',
 
             try {
                 // Desestructurar el cuerpo de la petición
-                const { nombres } = req.body;
+                const {
+                    nombres,
+                    apellidos,
+                    departamento,
+                    correo } = req.body;
 
                 // Crear un modelo de Empleado
                 const nuevoEmpleado = new EmpleadoModel({
                     nombres,
+                    apellidos,
+                    departamento,
+                    correo,
                     numero_colaborador,
                     contrasenha
                 });
