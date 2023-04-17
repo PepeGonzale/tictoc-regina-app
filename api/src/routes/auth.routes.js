@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const secret = process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x'; // Definir el secreto de tu aplicación
 
 // EndPoint para hacer una prueba
 router.get('/test', (req, resp, next) => {
@@ -68,9 +69,27 @@ router.post('/ingresar',
                         async (error) => {
                             if (error) return next(error);
 
-                            const body = { _id: user._id, numero_colaborador: user.numero_colaborador };
-                            const token = jwt.sign({ user: body }, process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x');
+                            const body = { 
+                                _id: user._id, 
+                                _pwd: user.contrasenha
+                            };
 
+                            // Se genera el token
+                            const token = jwt.sign({ user: body }, secret);
+
+                            // // Decodificar forma 1 
+                            // const decoded = jwt.verify(token, secret);
+                            // const correo = decoded.user._id;
+                            // const usuario = decoded.user.numero_colaborador;
+                            // console.log(correo, usuario)
+
+                            // // Decodificar forma 2 
+                            // // Decodificar el token y extraer el cuerpo (payload)
+                            // const decodedToken = jwt.decode(token);
+                            // const payload = decodedToken && decodedToken.user;
+
+                            // console.log(payload); // Imprime el cuerpo del token
+                           
                             // retorna token
                             return resp.json({
                                 path: '/auth/ingresar',

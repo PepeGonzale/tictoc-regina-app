@@ -101,7 +101,7 @@ passport.use('ingresar_empleado',
                     return done(null, false, { message: `La contraseña ${contrasenha} es incorrecto.` });
 
                 // Retorna los datos del empleado logeado
-                return done(null, { user: empleado }, { message: 'Empleado ingreso exitosamente.' });
+                return done(null, empleado, { message: 'Empleado ingreso exitosamente.' });
 
             } catch (error) {
                 return done(error);
