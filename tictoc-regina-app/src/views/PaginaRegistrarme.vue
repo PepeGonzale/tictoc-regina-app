@@ -182,11 +182,10 @@ export default {
           //***  Mensaje de error */
           Swal.fire({
             position: "bottom-right",
-            icon: "danger",
+            icon: "error",
             title: "Aviso",
             text: "Hubo un error en la operación.",
-            showConfirmButton: true,
-            timer: 1500,
+            showConfirmButton: true
           });
         });
     },

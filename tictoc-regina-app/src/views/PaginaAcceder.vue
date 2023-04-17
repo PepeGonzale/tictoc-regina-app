@@ -18,7 +18,7 @@
                     <b-form-input
                       id="input-1"
                       v-model="formAcceder.numEmpleado"
-                      type="type"
+                      type="number"
                       placeholder="Ingrese su número de empleado..."
                       required
                     ></b-form-input>
@@ -45,10 +45,16 @@
 
                   <div>
                     <b-button-group>
-                      <b-button type="submit" variant="success"
+                      <b-button
+                        type="submit"
+                        variant="success"
+                        id="btnFormAccederAceptar"
                         >Acceder</b-button
                       >
-                      <b-button type="reset" variant="danger"
+                      <b-button
+                        type="reset"
+                        variant="danger"
+                        id="btnFormAccederCancelar"
                         >Cancelar</b-button
                       >
                     </b-button-group>
@@ -64,15 +70,16 @@
 </template>
 
 <script>
-import UsuarioService from "../servicies/UsuarioService";
+import AuthService from "../servicies/AuthService";
+import Swal from "sweetalert2";
 
 export default {
   name: "PaginaAcceder",
   data() {
     return {
       formAcceder: {
-        numEmpleado: "",
-        password: ""
+        numEmpleado: null,
+        password: null,
       },
       show: true,
     };
@@ -80,30 +87,85 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      console.log(this.formAcceder);
 
-      // Obtener los datos de un empleado con su numero de empleado
-      UsuarioService.getEmpleadoByNumEmpleado(this.formAcceder.numEmpleado).then(
-        (resp) => {
-          let { contrasenha } = resp.data.data;
+      const credencialesEmpleado = {
+        numero_colaborador: this.formAcceder.numEmpleado + "",
+        contrasenha: this.formAcceder.password,
+      };
 
-          if( contrasenha === this.formAcceder.password ){
-            this.$router.push({ name: 'PaginaBienvenido' });
+      AuthService.fncIngresarEmpleado(credencialesEmpleado)
+        .then((resp) => {
+          const data = resp.data;
+
+          if (data.status === "failure") {
+            //***  Mensaje de error autenticación */
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: data.error,
+              text: data.message,
+              showConfirmButton: true,
+            });
+          } else {
+
+            // Guardar token en el almacenamiento local
+            localStorage.setItem("__tkn", data.token);
+
+            //***  Mensaje de autenticación exitosa */
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Hecho",
+              text: data.message,
+              showConfirmButton: false,
+              timer: 1700,
+            }).then(() => {
+              // Vaciar el formulario
+              document.querySelector("#btnFormAccederCancelar").click();
+
+              /** Registrar una cookie */
+              // // Generar caducidad de token
+              // const today = new Date();
+              // const expiry = new Date(
+              //   today.getTime() + 30 * 24 * 60 * 60 * 1000
+              // ); // Caduca en 30 días
+
+              // // Obtener el dominio
+              // const domain = window.location.hostname;
+
+              // // Registar token en una cookie
+              // document.cookie =
+              //   "token=" +
+              //   data.token +
+              //   "; expires=" +
+              //   expiry.toUTCString() +
+              //   "; path=/; domain="+domain+"; secure";
+
+              // Redirigir el usuario la pagina de bienvenido
+              this.$router.push({ name: "PaginaBienvenido" });
+
+            });
           }
-        }
-      )
-      .catch((error) => {
-        alert(error);
-        console.log("Error : UsuarioService.createUsuario(nuevoEmpleado) >> ",error);
-      });
 
+          console.log(JSON.stringify(data));
+        })
+        .catch(() => {
+          //***  Mensaje de error */
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Aviso",
+            text: "Hubo un error en la operación. Verifica el servidor del API.",
+            showConfirmButton: true,
+          });
+        });
     },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
+      this.formAcceder.numEmpleado = null;
+      this.formAcceder.password = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {

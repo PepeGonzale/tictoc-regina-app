@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { Schema } = mongoose;
 
+mongoose.set('strictQuery', false);
+
 // Crear un modelo 
 const EmpleadoSchema = new Schema({
     nombres: { type: 'String', required: true },
