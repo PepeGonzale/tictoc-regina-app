@@ -7,11 +7,7 @@ class EmpleadoService {
     BASE_AXIOS_EMPLEADO = "/empleado";
 
     fncTestEmpleado() {
-        return axios.get(`${this.BASE_AXIOS_EMPLEADO}/test`,{
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('__tkn')
-            }
-        });
+        return axios.get(`${this.BASE_AXIOS_EMPLEADO}/test`);
     }
 
 }
