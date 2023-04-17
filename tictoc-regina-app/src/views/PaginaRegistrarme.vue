@@ -91,10 +91,16 @@
 
                   <div class="mt-3">
                     <b-button-group>
-                      <b-button type="submit" variant="success" id="btnFormRegistrarmeAceptar"
+                      <b-button
+                        type="submit"
+                        variant="success"
+                        id="btnFormRegistrarmeAceptar"
                         >Dar de alta</b-button
                       >
-                      <b-button type="reset" variant="danger" id="btnFormRegistrarmeCancelar"
+                      <b-button
+                        type="reset"
+                        variant="danger"
+                        id="btnFormRegistrarmeCancelar"
                         >Cancelar</b-button
                       >
                     </b-button-group>
@@ -118,6 +124,7 @@
 
 <script>
 import AuthService from "../servicies/AuthService";
+import Swal from "sweetalert2";
 
 export default {
   name: "PaginaAcceder",
@@ -156,12 +163,32 @@ export default {
         contrasenha: this.formRegistrarme.password,
       };
 
-      const resp = await AuthService.fncRegistrarEmpleado(nuevoEmpleado);
-      const status = resp.data.status;
-      if( status === 200){
-        document.getElementById("btnFormRegistrarmeCancelar").click();
-      }
+      AuthService.fncRegistrarEmpleado(nuevoEmpleado)
+        .then(() => {
+          //let empleado = resp.data;
+          document.querySelector("#btnFormRegistrarmeCancelar").click();
 
+          //***  Mensaje de exitosa */
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Hecho",
+            text: "Registrado exitosamente.",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        })
+        .catch(() => {
+          //***  Mensaje de error */
+          Swal.fire({
+            position: "bottom-right",
+            icon: "danger",
+            title: "Aviso",
+            text: "Hubo un error en la operación.",
+            showConfirmButton: true,
+            timer: 1500,
+          });
+        });
     },
     onReset(event) {
       event.preventDefault();
