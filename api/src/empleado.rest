@@ -1,0 +1,27 @@
+@api = http://localhost:3069/api/v1/tictoc-clubregina/empleado
+
+@_id = 643c3a8a1b8c59afd5353aba
+
+@_tkn= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0M2RjYmExOGJlZmNlNjgwOGYzYzFhMiIsIl9wd2QiOiIkMmIkMTMkYVN2V0ljN2lTeFJxcW1QRWhsYmE3dTRuWjNIcFJYVFdzSjg2Q0N2dC45cGFWN0I3UkpQNi4ifSwiaWF0IjoxNjgxNzcxNDI5fQ.t8_WEDXU2de-nt5PzMeeHx6tOoBQoT-moatUdAa1NwQ
+
+### Hacer prueba
+GET {{api}}/test
+Access-Control-Allow-Origin: http://localhost:3066
+Content-Type: application/json
+Authorization: Bearer {{_tkn}}
+
+{
+    "msg" : "Esto es una prueba"
+}
+
+
+### Hacer prueba
+GET {{api}}/data
+Access-Control-Allow-Origin: http://localhost:3066
+Content-Type: application/json
+Authorization: Bearer {{_tkn}}
+
+{
+    "msg" : "Esto es una prueba"
+}
+

@@ -12,7 +12,7 @@ router.get('/test', (req, resp, next) => {
     resp.status(200).send({
         message: 'Test exitosa!',
         path: '/auth/test',
-        status: 200,
+        status: 'success',
         auth_data: req.body
     });
 });
@@ -29,7 +29,7 @@ router.post('/registrar',
         resp.json({
             message: 'Registro empleado exitosamente!',
             path: '/auth/registrar',
-            status: 200,
+            status: 'success',
             auth_data: req.user
         });
     }

@@ -10,6 +10,10 @@ class EmpleadoService {
         return axios.get(`${this.BASE_AXIOS_EMPLEADO}/test`);
     }
 
+    fncTestEmpleado() {
+        return axios.get(`${this.BASE_AXIOS_EMPLEADO}/test`);
+    }
+
 }
 
 export default new EmpleadoService();
