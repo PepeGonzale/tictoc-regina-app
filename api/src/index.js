@@ -4,9 +4,11 @@ const morgan = require('morgan');
 const _connect = require('./database');
 const usuarioRouters = require('./routes/usuario.routes');
 const authRouters = require('./routes/auth.routes');
+const empleadoRouters = require('./routes/empleado.routes');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const app = express();
+const passport = require('passport');
 
 // Enlace para consumir api
 const BASE_URL_API = '/api/v1/tictoc-clubregina';
@@ -33,6 +35,9 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false}));
+
+// Plug in the JWT strategy as a middleware so only verified users can access this route.
+app.use(`${BASE_URL_API}/empleado`, passport.authenticate('jwt', { session: false }), empleadoRouters);
 
 app.use(`${BASE_URL_API}/auth`, authRouters);
 
