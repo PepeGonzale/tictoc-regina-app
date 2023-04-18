@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <NavBar />
-
-    <main style="flex: 1;margin-top: 100px;">
+    <NavBar :empleado="navbar.empleado" :session="navbar.session" />
+    <main style="flex: 1; margin-top: 100px">
       <b-container class="my-5">
         <router-view />
       </b-container>
@@ -18,13 +17,59 @@
 import NavBar from "./components/NavBar.vue";
 import Footer from "./components/Footer.vue";
 import { BContainer } from "bootstrap-vue";
+import EmpleadoService from "./servicies/EmpleadoService";
+import Swal from "sweetalert2";
 
 export default {
   name: "App",
+  data() {
+    return {
+      navbar: {
+        empleado: {},
+        session: false,
+      },
+    };
+  },
   components: {
     NavBar,
     Footer,
     BContainer,
+  },
+  async mounted() {
+    if (localStorage.getItem("__tkn")) {
+      await EmpleadoService.fncDataEmpleado()
+        .then((resp) => {
+          //alert(JSON.stringify(resp.data.status));
+
+          if (resp.data.status === "success") {
+            const data = resp.data._data_empleado.data;
+            const empleado = {
+              nombres: data.nombres,
+              apellidos: data.apellidos,
+              departamento: data.departamento,
+              numEmpleado: data.numero_colaborador,
+            };
+
+            this.navbar = {
+              empleado,
+              session: true,
+            };
+          }
+        })
+        .catch(() => {
+          //alert(JSON.stringify(resp));
+          this.$router.push({ name: "PaginaInicio" });
+
+          //***  Mensaje de error */
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Aviso",
+            text: "Hubo un error en la operación.",
+            showConfirmButton: true,
+          });
+        });
+    }
   },
 };
 </script>

@@ -176,6 +176,10 @@ export default {
             text: "Registrado exitosamente.",
             showConfirmButton: false,
             timer: 3000,
+          }).then(() => {
+            document.querySelector("#btnFormRegistrarmeCancelar").click();
+            // Redirigir el usuario la pagina de acceder
+            this.$router.push({ name: "PaginaAcceder" });
           });
         })
         .catch(() => {
@@ -185,7 +189,7 @@ export default {
             icon: "error",
             title: "Aviso",
             text: "Hubo un error en la operación.",
-            showConfirmButton: true
+            showConfirmButton: true,
           });
         });
     },

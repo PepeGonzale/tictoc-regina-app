@@ -68,7 +68,7 @@ router.get(`/data`, verificarToken, async (req, res, next) => {
 
         res.status(200).json({
             path: '/empleado/data',
-            status: 'failure',
+            status: 'success',
             _data_empleado: {
                 context: 'Credenciales correctos.',
                 message: 'Se realizo la petición con autorización, exitosamente.',

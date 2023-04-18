@@ -119,7 +119,7 @@ export default {
               title: "Hecho",
               text: data.message,
               showConfirmButton: false,
-              timer: 1700,
+              timer: 1300,
             }).then(() => {
               // Vaciar el formulario
               document.querySelector("#btnFormAccederCancelar").click();
@@ -143,8 +143,8 @@ export default {
               //   "; path=/; domain="+domain+"; secure";
 
               // Redirigir el usuario la pagina de bienvenido
-              this.$router.push({ name: "PaginaBienvenido" });
-
+              //this.$router.push({ name: "PaginaBienvenido" });
+              window.location.href = "/bienvenido";
             });
           }
 
