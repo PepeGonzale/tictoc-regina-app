@@ -4,12 +4,15 @@ const EmpleadoModel = require('../models/Empleado');
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
+// Definir el secreto de tu aplicación
+const secret = process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x'; 
+
 // Configurando una estrategia de autenticación de Passport.js
 // llamada `default` que sirve como generar y verificar token
 passport.use(
     // Crear un estrategia para verificar y generar token
     new JWTstrategy({
-        secretOrKey: process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x',
+        secretOrKey: secret,
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
     },
         // Recibir un token como parametro para validar o generar

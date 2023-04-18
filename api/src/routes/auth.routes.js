@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const secret = process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x'; // Definir el secreto de tu aplicación
+
+// Definir el secreto de tu aplicación
+const secret = process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x'; 
 
 // EndPoint para hacer una prueba
 router.get('/test', (req, resp, next) => {
@@ -70,7 +72,7 @@ router.post('/ingresar',
                             if (error) return next(error);
 
                             const body = { 
-                                _id: user._id, 
+                                _num: user.numero_colaborador, 
                                 _pwd: user.contrasenha
                             };
 

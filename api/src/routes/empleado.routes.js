@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const Empleado = require('../models/Empleado');
 const jwt = require('jsonwebtoken');
-const secret = process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x'; // Definir el secreto de tu aplicación
+
+// Definir el secreto de tu aplicación
+const secret = process.env.ENV_TOKEN_SECRET_OR_KEY || 'u$W{X:s@vj%6h}x'; 
 
 // Crear una función middleware para verificar y decodificar 
 // el token enviado en el encabezado de la solicitud
@@ -48,7 +50,7 @@ router.get(`/test`, (req, resp, next) => {
 router.get(`/data`, verificarToken, async (req, res, next) => {
     try {
         const token_payload = req.user.user;
-        const usuario = await Empleado.findById(token_payload._id);
+        const usuario = await Empleado.findOne({ numero_colaborador : token_payload._num });
 
         if (!usuario) {
             return res.status(404).json({ mensaje: 'Usuario no encontrado' });
