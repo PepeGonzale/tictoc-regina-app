@@ -17,7 +17,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav left v-if="session">
-          <b-nav-item :to="{ name: 'PaginaInicio' }">Mis datos</b-nav-item>
+          <b-nav-item :to="{ name: 'PaginaDatos' }">Mis datos</b-nav-item>
           <b-nav-item :to="{ name: 'PaginaEntrada' }">Calendario</b-nav-item>
         </b-navbar-nav>
 

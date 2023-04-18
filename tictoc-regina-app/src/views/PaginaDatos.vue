@@ -1,18 +1,28 @@
 <template>
   <div>
-    <b-card no-body>
-      <b-tabs v-model="tabIndex" card>
-        <b-tab title="Tab 1" :title-link-class="linkClass(0)"
-          >Tab contents 1</b-tab
-        >
-        <b-tab title="Tab 2" :title-link-class="linkClass(1)"
-          >Tab contents 2</b-tab
-        >
-        <b-tab title="Tab 3" :title-link-class="linkClass(2)"
-          >Tab contents 3</b-tab
-        >
-      </b-tabs>
-    </b-card>
+    <div>
+      <b-card
+        no-body
+        img-src="https://placekitten.com/380/200"
+        img-alt="Image"
+        img-top
+      >
+        <template #header>
+          <h4 class="mb-0">Empleado</h4>
+        </template>
+
+        <b-list-group flush>
+          <b-list-group-item>Steward</b-list-group-item>
+          <b-list-group-item>Juan Perez</b-list-group-item>
+          <b-list-group-item>19022441</b-list-group-item>
+        </b-list-group>
+
+        <b-card-body>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </b-card-body>
+      </b-card>
+    </div>
   </div>
 </template>
 
@@ -21,22 +31,8 @@ import EmpleadoService from "../servicies/EmpleadoService";
 import Swal from "sweetalert2";
 
 export default {
-  name: "PaginaBienvenido",
+  name: "PaginaDatos",
   components: {},
-  data() {
-    return {
-      tabIndex: 0,
-    };
-  },
-  methods: {
-    linkClass(idx) {
-      if (this.tabIndex === idx) {
-        return ["bg-primary", "text-light"];
-      } else {
-        return ["bg-light", "text-info"];
-      }
-    },
-  },
   created() {
     EmpleadoService.fncDataEmpleado()
       .then(() => {
