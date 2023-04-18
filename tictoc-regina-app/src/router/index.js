@@ -15,12 +15,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/inicio'
+    redirect: '/inicio',
+    meta: { isAuthenticated: true } // ruta protegida
   },
   {
     path: '/inicio',
     name: 'PaginaInicio',
-    component: PaginaInicio
+    component: PaginaInicio,
+    meta: { isAuthenticated: true } // ruta protegida
   },
   {
     path: '/acceder',
@@ -98,6 +100,22 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     next();
+  }
+});
+
+// verificar si el usuario está autenticado para redireccionar al usuario
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.isAuthenticated)) {
+    EmpleadoService.fncTestEmpleado()
+      .then(() => {
+        next({ name: 'PaginaBienvenido' });
+      })
+      .catch(error => {
+        console.log(error);
+        next();
+      });
+  } else {
+    next()
   }
 })
 
